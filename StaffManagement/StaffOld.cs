@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StaffManagement
 {
-     class Staff
+     class StaffOld
     {
         protected static int seedId = 10000;
        

@@ -10,7 +10,8 @@ namespace StaffManagement
         {   
             int choice =1;
 
-            List<Staff> staff = new List<Staff>();
+
+            List<StaffOld> staff = new List<StaffOld>();
             do
             {
                 Console.WriteLine("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n4.View All Staff");
@@ -45,7 +46,7 @@ namespace StaffManagement
             } while (choice != 0);
         }
 
-        static  void Menu(List<Staff> staff, int type)
+        static  void Menu(List<StaffOld> staff, int type)
         {
             int choice;
 

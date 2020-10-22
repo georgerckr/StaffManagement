@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StaffManagement
 {
-    class AdministrativeStaff : Staff
+    class AdministrativeStaff : StaffOld
     {
         private string department;
       
