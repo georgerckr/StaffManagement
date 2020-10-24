@@ -6,7 +6,7 @@ namespace StaffManagement.Model
 {
     public class TeachingStaff : Staff  
     {
-       public  string subject;
+       public  string Subject { get; set; }
         
         public TeachingStaff()
         {
