@@ -4,9 +4,15 @@ namespace StaffManagement.Model
 {
     public class Staff
     {
-        Guid guid = Guid.NewGuid();
-        string fullName;
-        DateTime dateJoined;
-
+        public string StaffId
+        {
+            get;
+             set;
+        }
+        public string FullName { get; set; }
+        public DateTime DateJoined { get; set; }
+        public int StaffType { get; set; }
     }
+
+    
 }
