@@ -7,12 +7,13 @@ namespace StaffManagement.Model
 {
     public class SupportStaff : Staff
     {
+        public string Category { get; set; }
         public SupportStaff()
         {
             StaffType = 3;
 
         }
-        public string Category { get; set; }
+       
 
     }
 }

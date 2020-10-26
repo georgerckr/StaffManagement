@@ -14,6 +14,7 @@ namespace StaffManagementConsole
         }
 
         public static void Print(string topic, string content="")
+        
         {
             Console.WriteLine("{0} {1}", topic, content);
         }

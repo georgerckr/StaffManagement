@@ -14,8 +14,9 @@ namespace StaffManagementConsole
             {
                 TeachingStaff teachingStaff = new TeachingStaff();
                 AddCommonDetails(teachingStaff);
-                teachingStaff.Subject = AskDetails.Read(" Enter Subject:");
+                teachingStaff.Subject = AskDetails.Read("Enter Subject:");
                 AskDetails.Print("Staff created with ID:", teachingStaff.StaffId);
+                AskDetails.Print("\n*******************\n");
                 return teachingStaff;
 
             }
@@ -27,6 +28,7 @@ namespace StaffManagementConsole
                 administrativeStaff.Department = AskDetails.Read("Enter Department");
                 administrativeStaff.Role = AskDetails.Read("Enter Role:");
                 AskDetails.Print("Staff created with ID:", administrativeStaff.StaffId);
+                AskDetails.Print("\n*******************\n");
                 return administrativeStaff;
             }
 
@@ -37,6 +39,7 @@ namespace StaffManagementConsole
                 AddCommonDetails(supportStaff);
                 supportStaff.Category = AskDetails.Read("Enter Category:");
                 AskDetails.Print("Staff created with ID:", supportStaff.StaffId);
+                AskDetails.Print("\n*******************\n");
                 return supportStaff;
             }
 
@@ -48,10 +51,34 @@ namespace StaffManagementConsole
         public static Staff AddCommonDetails(Staff staff)
         {
             staff.StaffId = Convert.ToString(IDSeed++);
-            staff.FullName = AskDetails.Read("Enter Name:");
-            staff.DateJoined = Convert.ToDateTime(AskDetails.Read("Enter Date Joined:"));
+            string name = AskDetails.Read("Enter Name:");
+            if (String.IsNullOrEmpty(name))
+            {
+                AskDetails.Print("\nName cannot be null!");
+                AddCommonDetails(staff);
+            }
+            else
+            {
+                staff.FullName = name;
+            }
+
+            
+             AddDateJoined(staff);
             return staff;
 
+        }
+        public static void AddDateJoined(Staff staff)
+        {
+            string date = AskDetails.Read("\nEnter Date Joined:");
+            if (DateTime.TryParse(date, out DateTime dateTime))
+            {
+                staff.DateJoined = dateTime;
+            }
+            else
+            {
+                AskDetails.Print("\nEnter valid Date format");
+                AddDateJoined(staff);
+            }
         }
 
         public static void ViewDetails(Staff staff)
@@ -75,7 +102,7 @@ namespace StaffManagementConsole
                     break;
                 case 3:
                     ViewCommonDetails(staff);
-                    SupportStaff supportStaff = new SupportStaff();
+                    SupportStaff supportStaff = staff as SupportStaff;
                     AskDetails.Print("Category:", supportStaff.Category);
                     break;
                 default:
@@ -95,7 +122,7 @@ namespace StaffManagementConsole
 
         }
 
-        public static void UpdateDetails(Staff staff)
+        public static Staff UpdateDetails(Staff staff)
         {
 
             int choice;
@@ -104,19 +131,21 @@ namespace StaffManagementConsole
             {
                 case 1:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Subject\n"));
+                    AskDetails.Print("\n*******************\n");
+                    TeachingStaff teachingStaff = staff as TeachingStaff;
                     switch (choice)
                     {
                         case 1:
 
-                            staff.FullName = AskDetails.Read("\nEnter updated Name:");
+                            teachingStaff.FullName = AskDetails.Read("\nEnter updated Name:");
                             break;
 
                         case 2:
-                            staff.DateJoined = Convert.ToDateTime(AskDetails.Read("\nEnter updated Date:"));
+                            teachingStaff.DateJoined = Convert.ToDateTime(AskDetails.Read("\nEnter updated Date:"));
                             break;
 
                         case 3:
-                            TeachingStaff teachingStaff = staff as TeachingStaff;
+
 
                             teachingStaff.Subject = AskDetails.Read("\nEnter updated Subject:");
                             break;
@@ -124,58 +153,65 @@ namespace StaffManagementConsole
                         default:
                             break;
                     }
+                    return teachingStaff;
                     break;
                 case 2:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Department\n4.Role\n"));
+                    AskDetails.Print("\n*******************\n");
+                    AdministrativeStaff administrativeStaff = staff as AdministrativeStaff;
                     switch (choice)
                     {
                         case 1:
 
-                            staff.FullName = AskDetails.Read("\nEnter updated Name:");
+                            administrativeStaff.FullName = AskDetails.Read("\nEnter updated Name:");
                             break;
 
                         case 2:
-                            staff.DateJoined = Convert.ToDateTime(AskDetails.Read("\nEnter updated Date:"));
+                            administrativeStaff.DateJoined = Convert.ToDateTime(AskDetails.Read("\nEnter updated Date:"));
                             break;
 
                         case 3:
-                            AdministrativeStaff administrativeStaff = staff as AdministrativeStaff;
+
                             administrativeStaff.Department = AskDetails.Read("\nEnter updated Departemnt:");
                             break;
                         case 4:
-                            AdministrativeStaff administrativeStaff1 = staff as AdministrativeStaff;
-                            administrativeStaff1.Role = AskDetails.Read("\nEnter updated Role:");
+
+                            administrativeStaff.Role = AskDetails.Read("\nEnter updated Role:");
                             break;
 
                         default:
                             break;
                     }
+                    return administrativeStaff;
                     break;
                 case 3:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Category\n"));
+                    AskDetails.Print("\n*******************\n");
+                    SupportStaff supportStaff = staff as SupportStaff;
                     switch (choice)
                     {
                         case 1:
 
-                            staff.FullName = AskDetails.Read("\nEnter updated Name:");
+                            supportStaff.FullName = AskDetails.Read("\nEnter updated Name:");
                             break;
 
                         case 2:
-                            staff.DateJoined = Convert.ToDateTime(AskDetails.Read("\nEnter updated Date:"));
+                            supportStaff.DateJoined = Convert.ToDateTime(AskDetails.Read("\nEnter updated Date:"));
                             break;
 
                         case 3:
-                            SupportStaff supportStaff = staff as SupportStaff;
-                           supportStaff.Category = AskDetails.Read("\nEnter updated Category:");
-                           
+
+                            supportStaff.Category = AskDetails.Read("\nEnter updated Category:");
+
                             break;
                     }
+                    return supportStaff;
                     break;
                 default:
                     break;
             }
 
-
+            return null;
 
 
         }
