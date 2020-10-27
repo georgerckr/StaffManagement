@@ -10,7 +10,7 @@ namespace StaffManagement.Model
         
         public TeachingStaff()
         {
-            StaffType = 1;
+            StaffType = StaffType.TeachingStaff;
         }
     }
 }

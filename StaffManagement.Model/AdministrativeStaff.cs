@@ -10,7 +10,7 @@ namespace StaffManagement.Model
         public string Role { get; set; }
         public AdministrativeStaff()
         {
-            StaffType = 2;
+            StaffType = StaffType.AdministrativeStaff;
         }
 
     }

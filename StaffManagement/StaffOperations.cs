@@ -83,8 +83,8 @@ namespace StaffManagementConsole
 
         public static void ViewDetails(Staff staff)
         {
-            int type = staff.StaffType;
-            switch (type)
+            StaffType type = staff.StaffType;
+            switch ((int)type)
             {
                 case 1:
 
@@ -122,12 +122,13 @@ namespace StaffManagementConsole
 
         }
 
+
         public static Staff UpdateDetails(Staff staff)
         {
 
             int choice;
-            int type = staff.StaffType;
-            switch (type)
+            StaffType type = (staff.StaffType);
+            switch ((int)type)
             {
                 case 1:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Subject\n"));

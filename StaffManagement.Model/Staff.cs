@@ -11,7 +11,7 @@ namespace StaffManagement.Model
         }
         public string FullName { get; set; }
         public DateTime DateJoined { get; set; }
-        public int StaffType { get; set; }
+        public  StaffType StaffType { get; set; }
     }
 
     

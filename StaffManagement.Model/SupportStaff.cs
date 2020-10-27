@@ -10,7 +10,7 @@ namespace StaffManagement.Model
         public string Category { get; set; }
         public SupportStaff()
         {
-            StaffType = 3;
+            StaffType =StaffType.SupportStaff;
 
         }
        
