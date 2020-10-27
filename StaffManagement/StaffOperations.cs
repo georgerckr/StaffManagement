@@ -8,44 +8,46 @@ namespace StaffManagementConsole
     class StaffOperations
     {
         public static int IDSeed = 10000;
-        public static Staff AddStaff(int type)
+        public static Staff AddStaff(StaffType type)
         {
-            if (type == 1)
+            switch (type)
             {
-                TeachingStaff teachingStaff = new TeachingStaff();
-                AddCommonDetails(teachingStaff);
-                teachingStaff.Subject = AskDetails.Read("Enter Subject:");
-                AskDetails.Print("Staff created with ID:", teachingStaff.StaffId);
-                AskDetails.Print("\n*******************\n");
-                return teachingStaff;
+                case StaffType.TeachingStaff:
+
+                    TeachingStaff teachingStaff = new TeachingStaff();
+                    AddCommonDetails(teachingStaff);
+                    teachingStaff.Subject = AskDetails.Read("Enter Subject:");
+                    AskDetails.Print("Staff created with ID:", teachingStaff.StaffId);
+                    AskDetails.Print("\n*******************\n");
+                    return teachingStaff;
+
+
+
+                case StaffType.AdministrativeStaff:
+
+                    AdministrativeStaff administrativeStaff = new AdministrativeStaff();
+                    AddCommonDetails(administrativeStaff);
+                    administrativeStaff.Department = AskDetails.Read("Enter Department");
+                    administrativeStaff.Role = AskDetails.Read("Enter Role:");
+                    AskDetails.Print("Staff created with ID:", administrativeStaff.StaffId);
+                    AskDetails.Print("\n*******************\n");
+                    return administrativeStaff;
+
+
+
+                case StaffType.SupportStaff:
+
+                    SupportStaff supportStaff = new SupportStaff();
+                    AddCommonDetails(supportStaff);
+                    supportStaff.Category = AskDetails.Read("Enter Category:");
+                    AskDetails.Print("Staff created with ID:", supportStaff.StaffId);
+                    AskDetails.Print("\n*******************\n");
+                    return supportStaff;
+
+
 
             }
-
-            else if (type == 2)
-            {
-                AdministrativeStaff administrativeStaff = new AdministrativeStaff();
-                AddCommonDetails(administrativeStaff);
-                administrativeStaff.Department = AskDetails.Read("Enter Department");
-                administrativeStaff.Role = AskDetails.Read("Enter Role:");
-                AskDetails.Print("Staff created with ID:", administrativeStaff.StaffId);
-                AskDetails.Print("\n*******************\n");
-                return administrativeStaff;
-            }
-
-
-            else if (type == 3)
-            {
-                SupportStaff supportStaff = new SupportStaff();
-                AddCommonDetails(supportStaff);
-                supportStaff.Category = AskDetails.Read("Enter Category:");
-                AskDetails.Print("Staff created with ID:", supportStaff.StaffId);
-                AskDetails.Print("\n*******************\n");
-                return supportStaff;
-            }
-
-
-
-            return null;
+           return null;
         }
 
         public static Staff AddCommonDetails(Staff staff)
@@ -88,8 +90,7 @@ namespace StaffManagementConsole
             {
                 case 1:
 
-                    ViewCommonDetails(staff);
-                    //staff = (TeachingStaff)staff;
+                    ViewCommonDetails(staff);                    
                     TeachingStaff teachingStaff = staff as TeachingStaff;
                     AskDetails.Print("Subject:", teachingStaff.Subject);
                     break;
@@ -113,7 +114,7 @@ namespace StaffManagementConsole
 
         }
 
-        public static void ViewCommonDetails(StaffManagement.Model.Staff staff)
+        public static void ViewCommonDetails(Staff staff)
         {
             AskDetails.Print("Name:", staff.FullName);
             AskDetails.Print("Staff ID:", Convert.ToString(staff.StaffId));
