@@ -2,21 +2,23 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using StaffManagement.Data.Interface;
+using StaffManagement.Data;
 
 namespace StaffManagementConsole
 {
     class Program
     {
-      
+
 
 
         public static void Main(string[] args)
         {
-            int choice = 1;
+            int choice ;
             int type;
-            
 
-            InMemoryManagement inMemory = new InMemoryManagement();
+
+            IStaffRepository staffRepo = new InMemoryStaffRepository();
 
             do
             {
@@ -30,35 +32,95 @@ namespace StaffManagementConsole
                     case 1:
                         type = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
                         AskDetails.Print("\n*******************\n");
-                        inMemory.CreateStaff((StaffType)type);
+                        Staff newStaff = StaffOperations.AddStaff((StaffType)type);
+                        staffRepo.CreateStaff(newStaff);
                         break;
 
 
                     case 2:
                         Id = AskDetails.Read("\nEnter Staff ID:");
-                        inMemory.ViewStaff(Id);
+                        StaffOperations.ViewDetails(staffRepo.GetStaffById(Id));
                         break;
 
 
                     case 3:
                         Id = AskDetails.Read("\nEnter Staff ID:");
-                        inMemory.Updatestaff(Id);
+                        //StaffType staffType = (StaffType)staffRepo.FindStaffType(Id);
+                        //Staff updatedStaff = StaffOperations.UpdateDetails(staffType);
+                        //staffRepo.UpdateStaff(updatedStaff);
+                        string name = AskDetails.Read("\n Enter updated name:");
+                        DateTime date = StaffOperations.AddDateJoined();
+                        StaffType staffType = (StaffType)staffRepo.FindStaffType(Id);
+                        string extra1="";
+                        string extra2="";
+                        switch (staffType)  
+                        {
+                            case StaffType.TeachingStaff:
+                                 extra1 = AskDetails.Read("\nEnter updated subject");
+                                break;
+                            case StaffType.AdministrativeStaff:
+                                 extra1 = AskDetails.Read("\nEnter updated department");
+                                 extra2 = AskDetails.Read("\nEnter updated role");
+                                break;
+                            case StaffType.SupportStaff:
+                                 extra1 = AskDetails.Read("\nEnter updated category");
+                                break;
+                            default:
+                                break;
+                        }
+                        if (staffRepo.UpdateStaff(Id, name, date, extra1, extra2))
+                        {
+                            AskDetails.Print("\nStaff Upadted!");
+                        }
+                        else
+                        {
+                            AskDetails.Print("\nEnter valid Staff ID");
+                        }
                         break;
 
 
                     case 4:
 
                         Id = AskDetails.Read("\nEnter Staff ID");
-                        inMemory.DeleteStaff(Id);
+                        if (staffRepo.DeleteStaff(Id))
+                        {
+                            AskDetails.Print("\nStaff deleted!");
+                        }
+                        else
+                        {
+                            AskDetails.Print("\nEnter valid staff ID");
+                        }
                         break;
                     case 5:
-                        
-                        inMemory.ViewAll();
+
+                        List<Staff> staffs= staffRepo.GetAllStaff();
+                        foreach (var staff in staffs)
+                        {
+                            StaffOperations.ViewDetails(staff);
+                            AskDetails.Print("\n****************");
+                        }
+                        if(staffs == null)
+                        {
+                            AskDetails.Print("\nNo Staff details available!");
+                        }
+
+
                         break;
 
                     case 6:
                         type = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
-                        inMemory.ViewByType((StaffType)type);
+                        List<Staff> staffs1 = staffRepo.GetStaffByType((StaffType)type);
+                        foreach (var staff in staffs1)
+                        {
+                            StaffOperations.ViewDetails(staff);
+                            AskDetails.Print("\n****************");
+
+                        }
+                        if (staffs1 == null)
+                        {
+                            AskDetails.Print("\nNo Staff details available!");
+                        }
+
                         break;
                 }
 

@@ -65,22 +65,22 @@ namespace StaffManagementConsole
             }
 
             
-             AddDateJoined(staff);
+            staff.DateJoined= AddDateJoined();
             return staff;
 
         }
-        public static void AddDateJoined(Staff staff)
+        public static DateTime AddDateJoined()
         {
             string date = AskDetails.Read("\nEnter Date Joined:");
             if (DateTime.TryParse(date, out DateTime dateTime))
             {
-                staff.DateJoined = dateTime;
+                return dateTime;
             }
             else
             {
                 AskDetails.Print("\nEnter valid Date format");
-                AddDateJoined(staff);
-            }
+                AddDateJoined();
+            }return dateTime;
         }
 
         public static void ViewDetails(Staff staff)
@@ -124,14 +124,14 @@ namespace StaffManagementConsole
         }
 
 
-        public static Staff UpdateDetails(Staff staff)
+        public static Staff UpdateDetails(StaffType type)
         {
 
             int choice;
-            StaffType type = (staff.StaffType);
-            switch ((int)type)
+            Staff staff = new Staff();                 
+            switch (type)
             {
-                case 1:
+                case StaffType.TeachingStaff:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Subject\n"));
                     AskDetails.Print("\n*******************\n");
                     TeachingStaff teachingStaff = staff as TeachingStaff;
@@ -156,8 +156,7 @@ namespace StaffManagementConsole
                             break;
                     }
                     return teachingStaff;
-                    break;
-                case 2:
+                case StaffType.AdministrativeStaff:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Department\n4.Role\n"));
                     AskDetails.Print("\n*******************\n");
                     AdministrativeStaff administrativeStaff = staff as AdministrativeStaff;
@@ -185,8 +184,7 @@ namespace StaffManagementConsole
                             break;
                     }
                     return administrativeStaff;
-                    break;
-                case 3:
+                case StaffType.SupportStaff:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Category\n"));
                     AskDetails.Print("\n*******************\n");
                     SupportStaff supportStaff = staff as SupportStaff;
@@ -208,7 +206,6 @@ namespace StaffManagementConsole
                             break;
                     }
                     return supportStaff;
-                    break;
                 default:
                     break;
             }
