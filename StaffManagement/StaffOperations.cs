@@ -124,12 +124,13 @@ namespace StaffManagementConsole
         }
 
 
-        public static Staff UpdateDetails(StaffType type)
+        public static Staff UpdateDetails(Staff staff)
         {
 
             int choice;
-            Staff staff = new Staff();                 
-            switch (type)
+            //Staff staff = new Staff();         
+            
+            switch (staff.StaffType)
             {
                 case StaffType.TeachingStaff:
                     choice = Convert.ToInt32(AskDetails.Read("\nEnter choice \n1.Name\n2.Date of Joining\n3.Subject\n"));

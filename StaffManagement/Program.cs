@@ -45,37 +45,10 @@ namespace StaffManagementConsole
 
                     case 3:
                         Id = AskDetails.Read("\nEnter Staff ID:");
-                        //StaffType staffType = (StaffType)staffRepo.FindStaffType(Id);
-                        //Staff updatedStaff = StaffOperations.UpdateDetails(staffType);
-                        //staffRepo.UpdateStaff(updatedStaff);
-                        string name = AskDetails.Read("\n Enter updated name:");
-                        DateTime date = StaffOperations.AddDateJoined();
-                        StaffType staffType = (StaffType)staffRepo.FindStaffType(Id);
-                        string extra1="";
-                        string extra2="";
-                        switch (staffType)  
-                        {
-                            case StaffType.TeachingStaff:
-                                 extra1 = AskDetails.Read("\nEnter updated subject");
-                                break;
-                            case StaffType.AdministrativeStaff:
-                                 extra1 = AskDetails.Read("\nEnter updated department");
-                                 extra2 = AskDetails.Read("\nEnter updated role");
-                                break;
-                            case StaffType.SupportStaff:
-                                 extra1 = AskDetails.Read("\nEnter updated category");
-                                break;
-                            default:
-                                break;
-                        }
-                        if (staffRepo.UpdateStaff(Id, name, date, extra1, extra2))
-                        {
-                            AskDetails.Print("\nStaff Upadted!");
-                        }
-                        else
-                        {
-                            AskDetails.Print("\nEnter valid Staff ID");
-                        }
+                       // StaffType staffType = (StaffType)staffRepo.FindStaffType(Id);
+                        Staff updatedStaff = StaffOperations.UpdateDetails(staffRepo.GetStaffById(Id));
+                        staffRepo.UpdateStaff(updatedStaff);
+                       
                         break;
 
 

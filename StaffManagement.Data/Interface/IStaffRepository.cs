@@ -9,7 +9,7 @@ namespace StaffManagement.Data.Interface
     {
         void CreateStaff(Staff staff);
         //void UpdateStaff(Staff staff);
-        bool UpdateStaff(string Id, string name, DateTime date, string extra1, string extra2);
+        bool UpdateStaff(Staff staff);
         Staff GetStaffById(string StaffID);
         bool DeleteStaff(string StaffID);
         List<Staff> GetStaffByType(StaffType staffType);

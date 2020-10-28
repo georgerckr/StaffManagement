@@ -8,48 +8,85 @@ namespace StaffManagement.Data
 {
     public class InMemoryStaffRepository : IStaffRepository
     {
-        public static List<Staff> staffs = new List<Staff>();
+        List<Staff> allStaff;
+        public InMemoryStaffRepository()
+        {
+            allStaff = new List<Staff>();
+            SupportStaff supportStaff = new SupportStaff()
+            {
+                Category = "cs",
+                FullName = "George",
+                StaffId = "20000",
+                DateJoined = new DateTime(1998, 5, 5)
+
+
+            };
+            AdministrativeStaff administrativeStaff = new AdministrativeStaff();
+            administrativeStaff.FullName = "Roy";
+            administrativeStaff.Department = "cs";
+            administrativeStaff.DateJoined = new DateTime(2004, 5, 5);
+            administrativeStaff.StaffId = "25000";
+            administrativeStaff.Role = "VC";
+            allStaff.Add(administrativeStaff);
+            allStaff.Add(supportStaff);
+
+
+        }
         public void CreateStaff(Staff staff)
         {
-            staffs.Add(staff);
+            allStaff.Add(staff);
         }
 
-        //public void UpdateStaff(Staff staff) { }
-        public bool UpdateStaff(string Id, string name, DateTime date,string extra1,string extra2)
+        public bool UpdateStaff(Staff newStaff)
         {
-            foreach (var staff in staffs)
+
+            for (int i = 0; i < allStaff.Count; i++)
             {
-                if (staff.StaffId == Id)
+                if (allStaff[i].StaffId == newStaff.StaffId)
                 {
-                    staff.FullName = name;
-                    staff.DateJoined = date;
-                    switch (staff.StaffType)
-                    {
-                        case StaffType.TeachingStaff:
-                            TeachingStaff teachingStaff = staff as TeachingStaff;
-                            teachingStaff.Subject = extra1;
-                            break;
-                        case StaffType.AdministrativeStaff:
-                            AdministrativeStaff administrativeStaff = staff as AdministrativeStaff;
-                            administrativeStaff.Department = extra1;
-                            administrativeStaff.Role = extra2;
-                            break;
-                        case StaffType.SupportStaff:
-                            SupportStaff supportStaff = staff as SupportStaff;
-                            supportStaff.Category = extra1;
-                            break;
-                        default:
-                            break;
-                    }
+                    allStaff[i] = newStaff;
                     return true;
+
                 }
 
-            }return false;
-
+            }
+            return false;
         }
+        //public bool UpdateStaff(string Id, string name, DateTime date,string extra1,string extra2)
+        //{
+        //    foreach (var staff in staffs)
+        //    {
+        //        if (staff.StaffId == Id)
+        //        {
+        //            staff.FullName = name;
+        //            staff.DateJoined = date;
+        //            switch (staff.StaffType)
+        //            {
+        //                case StaffType.TeachingStaff:
+        //                    TeachingStaff teachingStaff = staff as TeachingStaff;
+        //                    teachingStaff.Subject = extra1;
+        //                    break;
+        //                case StaffType.AdministrativeStaff:
+        //                    AdministrativeStaff administrativeStaff = staff as AdministrativeStaff;
+        //                    administrativeStaff.Department = extra1;
+        //                    administrativeStaff.Role = extra2;
+        //                    break;
+        //                case StaffType.SupportStaff:
+        //                    SupportStaff supportStaff = staff as SupportStaff;
+        //                    supportStaff.Category = extra1;
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //            return true;
+        //        }
+
+        //    }return false;
+
+        //}
         public Staff GetStaffById(string StaffID)
         {
-            foreach (var staff in staffs)
+            foreach (var staff in allStaff)
             {
                 if (staff.StaffId == StaffID)
                 {
@@ -60,11 +97,11 @@ namespace StaffManagement.Data
         }
         public bool DeleteStaff(string StaffID)
         {
-            foreach (var staff in staffs)
+            foreach (var staff in allStaff)
             {
                 if (staff.StaffId == StaffID)
                 {
-                    staffs.Remove(staff);
+                    allStaff.Remove(staff);
                     return true;
                 }
             }
@@ -73,7 +110,7 @@ namespace StaffManagement.Data
         public List<Staff> GetStaffByType(StaffType staffType)
         {
             List<Staff> staffByType = new List<Staff>();
-            foreach (var staff in staffs)
+            foreach (var staff in allStaff)
             {
                 if (staff.StaffType == staffType)
                 {
@@ -84,11 +121,11 @@ namespace StaffManagement.Data
         }
         public List<Staff> GetAllStaff()
         {
-            return staffs;
+            return allStaff;
         }
         public StaffType? FindStaffType(string staffId)
         {
-            foreach (var staff in staffs)
+            foreach (var staff in allStaff)
             {
                 if (staff.StaffId == staffId)
                 {
