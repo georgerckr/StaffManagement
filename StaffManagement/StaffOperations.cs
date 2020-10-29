@@ -7,7 +7,7 @@ namespace StaffManagementConsole
 {
     class StaffOperations
     {
-        public static int IDSeed = 10000;
+        
         public static Staff AddStaff(StaffType type)
         {
             switch (type)
@@ -52,7 +52,7 @@ namespace StaffManagementConsole
 
         public static Staff AddCommonDetails(Staff staff)
         {
-            staff.StaffId = Convert.ToString(IDSeed++);
+            staff.StaffId = AskDetails.Read("\nEnter Staff ID:");
             string name = AskDetails.Read("Enter Name:");
             if (String.IsNullOrEmpty(name))
             {

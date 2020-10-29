@@ -8,27 +8,27 @@ namespace StaffManagement.Data
 {
     public class InMemoryStaffRepository : IStaffRepository
     {
-        List<Staff> allStaff;
+       public  List<Staff> allStaff;
         public InMemoryStaffRepository()
         {
             allStaff = new List<Staff>();
-            SupportStaff supportStaff = new SupportStaff()
-            {
-                Category = "cs",
-                FullName = "George",
-                StaffId = "20000",
-                DateJoined = new DateTime(1998, 5, 5)
+            //SupportStaff supportStaff = new SupportStaff()
+            //{
+            //    Category = "cs",
+            //    FullName = "George",
+            //    StaffId = "20000",
+            //    DateJoined = new DateTime(1998, 5, 5)
 
 
-            };
-            AdministrativeStaff administrativeStaff = new AdministrativeStaff();
-            administrativeStaff.FullName = "Roy";
-            administrativeStaff.Department = "cs";
-            administrativeStaff.DateJoined = new DateTime(2004, 5, 5);
-            administrativeStaff.StaffId = "25000";
-            administrativeStaff.Role = "VC";
-            allStaff.Add(administrativeStaff);
-            allStaff.Add(supportStaff);
+            //};
+            //AdministrativeStaff administrativeStaff = new AdministrativeStaff();
+            //administrativeStaff.FullName = "Roy";
+            //administrativeStaff.Department = "cs";
+            //administrativeStaff.DateJoined = new DateTime(2004, 5, 5);
+            //administrativeStaff.StaffId = "25000";
+            //administrativeStaff.Role = "VC";
+            //allStaff.Add(administrativeStaff);
+            //allStaff.Add(supportStaff);
 
 
         }
@@ -52,43 +52,12 @@ namespace StaffManagement.Data
             }
             return false;
         }
-        //public bool UpdateStaff(string Id, string name, DateTime date,string extra1,string extra2)
-        //{
-        //    foreach (var staff in staffs)
-        //    {
-        //        if (staff.StaffId == Id)
-        //        {
-        //            staff.FullName = name;
-        //            staff.DateJoined = date;
-        //            switch (staff.StaffType)
-        //            {
-        //                case StaffType.TeachingStaff:
-        //                    TeachingStaff teachingStaff = staff as TeachingStaff;
-        //                    teachingStaff.Subject = extra1;
-        //                    break;
-        //                case StaffType.AdministrativeStaff:
-        //                    AdministrativeStaff administrativeStaff = staff as AdministrativeStaff;
-        //                    administrativeStaff.Department = extra1;
-        //                    administrativeStaff.Role = extra2;
-        //                    break;
-        //                case StaffType.SupportStaff:
-        //                    SupportStaff supportStaff = staff as SupportStaff;
-        //                    supportStaff.Category = extra1;
-        //                    break;
-        //                default:
-        //                    break;
-        //            }
-        //            return true;
-        //        }
 
-        //    }return false;
-
-        //}
-        public Staff GetStaffById(string StaffID)
+        public Staff GetStaffById(string staffID)
         {
             foreach (var staff in allStaff)
             {
-                if (staff.StaffId == StaffID)
+                if (staff.StaffId == staffID)
                 {
                     return staff;
                 }
@@ -123,17 +92,7 @@ namespace StaffManagement.Data
         {
             return allStaff;
         }
-        public StaffType? FindStaffType(string staffId)
-        {
-            foreach (var staff in allStaff)
-            {
-                if (staff.StaffId == staffId)
-                {
-                    return staff.StaffType;
-                }
-            }
-            return null;
-        }
+       
 
     }
 }

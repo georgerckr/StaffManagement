@@ -14,11 +14,11 @@ namespace StaffManagementConsole
 
         public static void Main(string[] args)
         {
-            int choice ;
+            int choice;
             int type;
 
 
-            IStaffRepository staffRepo = new InMemoryStaffRepository();
+            IStaffRepository staffRepo = new JsonStaffRepository();
 
             do
             {
@@ -45,10 +45,9 @@ namespace StaffManagementConsole
 
                     case 3:
                         Id = AskDetails.Read("\nEnter Staff ID:");
-                       // StaffType staffType = (StaffType)staffRepo.FindStaffType(Id);
                         Staff updatedStaff = StaffOperations.UpdateDetails(staffRepo.GetStaffById(Id));
                         staffRepo.UpdateStaff(updatedStaff);
-                       
+
                         break;
 
 
@@ -66,16 +65,18 @@ namespace StaffManagementConsole
                         break;
                     case 5:
 
-                        List<Staff> staffs= staffRepo.GetAllStaff();
+                        List<Staff> staffs = staffRepo.GetAllStaff();
+                        if (staffs == null)
+                        {
+                            AskDetails.Print("\nNo Staff details available!");
+                            break;
+                        }
                         foreach (var staff in staffs)
                         {
                             StaffOperations.ViewDetails(staff);
                             AskDetails.Print("\n****************");
                         }
-                        if(staffs == null)
-                        {
-                            AskDetails.Print("\nNo Staff details available!");
-                        }
+                        
 
 
                         break;
