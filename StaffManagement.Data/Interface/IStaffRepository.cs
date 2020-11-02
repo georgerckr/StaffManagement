@@ -10,8 +10,8 @@ namespace StaffManagement.Data.Interface
         void CreateStaff(Staff staff);
         
         bool UpdateStaff(Staff staff);
-        Staff GetStaffById(string staffID);
-        bool DeleteStaff(string staffID);
+        Staff GetStaffById(int staffID);
+        bool DeleteStaff(int staffID);
         List<Staff> GetStaffByType(StaffType staffType);
         List<Staff> GetAllStaff();
         

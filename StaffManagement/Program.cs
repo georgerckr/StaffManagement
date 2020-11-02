@@ -4,6 +4,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using StaffManagement.Data.Interface;
 using StaffManagement.Data;
+using System.Configuration;
 
 namespace StaffManagementConsole
 {
@@ -17,8 +18,8 @@ namespace StaffManagementConsole
             int choice;
             int type;
 
-
-            IStaffRepository staffRepo = new JsonStaffRepository();
+            
+            IStaffRepository staffRepo = new XMLStaffRepository();
 
             do
             {
@@ -39,13 +40,14 @@ namespace StaffManagementConsole
 
                     case 2:
                         Id = AskDetails.Read("\nEnter Staff ID:");
-                        StaffOperations.ViewDetails(staffRepo.GetStaffById(Id));
+                        StaffOperations.ViewDetails(staffRepo.GetStaffById(Convert.ToInt32(Id)));
                         break;
 
 
                     case 3:
                         Id = AskDetails.Read("\nEnter Staff ID:");
-                        Staff updatedStaff = StaffOperations.UpdateDetails(staffRepo.GetStaffById(Id));
+                        Staff updatedStaff = staffRepo.GetStaffById(Convert.ToInt32(Id));
+                        updatedStaff= StaffOperations.UpdateDetails(updatedStaff);
                         staffRepo.UpdateStaff(updatedStaff);
 
                         break;
@@ -54,7 +56,7 @@ namespace StaffManagementConsole
                     case 4:
 
                         Id = AskDetails.Read("\nEnter Staff ID");
-                        if (staffRepo.DeleteStaff(Id))
+                        if (staffRepo.DeleteStaff(Convert.ToInt32(Id)))
                         {
                             AskDetails.Print("\nStaff deleted!");
                         }

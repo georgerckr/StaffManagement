@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace StaffManagement.Model
 {
+
+  
     public class Staff
     {
-        public string StaffId
+        public int StaffId
         {
             get;
              set;

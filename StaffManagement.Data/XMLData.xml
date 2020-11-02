@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStaff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Staff xsi:type="TeachingStaff">
+    <StaffId>9874</StaffId>
+    <FullName>NewStaff</FullName>
+    <DateJoined>1985-08-05T00:00:00</DateJoined>
+    <StaffType>TeachingStaff</StaffType>
+    <Subject>EC</Subject>
+  </Staff>
+  <Staff xsi:type="TeachingStaff">
+    <StaffId>8523</StaffId>
+    <FullName>George</FullName>
+    <DateJoined>2045-07-08T00:00:00</DateJoined>
+    <StaffType>TeachingStaff</StaffType>
+    <Subject>DSA</Subject>
+  </Staff>
+  <Staff xsi:type="AdministrativeStaff">
+    <StaffId>7777</StaffId>
+    <FullName>Roy</FullName>
+    <DateJoined>1987-06-04T00:00:00</DateJoined>
+    <StaffType>AdministrativeStaff</StaffType>
+    <Department>EC</Department>
+    <Role>VC</Role>
+  </Staff>
+</ArrayOfStaff>

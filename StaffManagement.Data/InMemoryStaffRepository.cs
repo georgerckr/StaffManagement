@@ -8,7 +8,7 @@ namespace StaffManagement.Data
 {
     public class InMemoryStaffRepository : IStaffRepository
     {
-       public  List<Staff> allStaff;
+         List<Staff> allStaff;
         public InMemoryStaffRepository()
         {
             allStaff = new List<Staff>();
@@ -53,7 +53,7 @@ namespace StaffManagement.Data
             return false;
         }
 
-        public Staff GetStaffById(string staffID)
+        public Staff GetStaffById(int staffID)
         {
             foreach (var staff in allStaff)
             {
@@ -64,7 +64,7 @@ namespace StaffManagement.Data
             }
             return null;
         }
-        public bool DeleteStaff(string StaffID)
+        public bool DeleteStaff(int StaffID)
         {
             foreach (var staff in allStaff)
             {

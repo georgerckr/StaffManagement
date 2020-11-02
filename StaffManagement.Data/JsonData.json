@@ -1,43 +1,10 @@
 [
   {
     "$type": "StaffManagement.Model.SupportStaff, StaffManagement.Model",
-    "Category": "vvj",
-    "StaffId": "10000",
-    "FullName": "jsonstaff",
-    "DateJoined": "1988-08-08T00:00:00",
-    "StaffType": 3
-  },
-  {
-    "$type": "StaffManagement.Model.AdministrativeStaff, StaffManagement.Model",
-    "Department": "Jstaff",
-    "Role": "New",
-    "StaffId": "10001",
-    "FullName": "Astaff",
-    "DateJoined": "1977-07-07T00:00:00",
-    "StaffType": 2
-  },
-  {
-    "$type": "StaffManagement.Model.TeachingStaff, StaffManagement.Model",
-    "Subject": "eee",
-    "StaffId": "10002",
-    "FullName": "NewAstaff",
-    "DateJoined": "1966-06-06T00:00:00",
-    "StaffType": 1
-  },
-  {
-    "$type": "StaffManagement.Model.SupportStaff, StaffManagement.Model",
-    "Category": "new",
-    "StaffId": "10000",
-    "FullName": "lateststaff",
-    "DateJoined": "2022-02-02T00:00:00",
-    "StaffType": 3
-  },
-  {
-    "$type": "StaffManagement.Model.SupportStaff, StaffManagement.Model",
     "Category": "cs",
-    "StaffId": "20000",
-    "FullName": "geo",
-    "DateJoined": "1999-09-09T00:00:00",
+    "StaffId": 8888,
+    "FullName": "Geo",
+    "DateJoined": "1988-08-08T00:00:00",
     "StaffType": 3
   }
 ]

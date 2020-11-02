@@ -1,52 +1,97 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.VisualBasic;
 using StaffManagement.Data.Interface;
 using StaffManagement.Model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace StaffManagement.Data
 {
-    public class JsonStaffRepository : IStaffRepository
+    [DataContract]
+    [XmlRoot(ElementName = "Staff")]
+
+    public class XMLStaffRepository : IStaffRepository
     {
-        JsonSerializerSettings settings;
         string filePath;
-        public JsonStaffRepository()
+
+        XmlSerializer xmlSerializer;
+        public XMLStaffRepository()
         {
 
-            filePath = ConfigurationManager.AppSettings["jsonFilePath"];
-            settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto,Formatting = Formatting.Indented };
-            if (File.Exists(filePath)==false)
+            filePath = ConfigurationManager.AppSettings["xmlFilePath"];
+
+            if (File.Exists(filePath) == false)
             {
                 File.Create(filePath);
 
+
             }
-            
+            xmlSerializer = new XmlSerializer(typeof(List<Staff>),
+                        new Type[] {
+                            typeof(List<AdministrativeStaff>),
+                            typeof(List<SupportStaff>),
+                            typeof(List<TeachingStaff>)
+                        });
+
+
         }
 
 
 
         void Serialize(List<Staff> allStaff)
         {
-            string jsonStream = JsonConvert.SerializeObject(allStaff, settings);
-            File.WriteAllText(filePath, jsonStream);
+
+            try
+            {
+                using (TextWriter streamWriter = new StreamWriter(filePath))
+                {
+                    xmlSerializer.Serialize(streamWriter, allStaff);
+                }
+            }
+            catch (Exception e)
+            {
+
+
+                Console.WriteLine(e.Message);
+            }
+
         }
         List<Staff> Deserialize()
         {
-            string jsonStream = File.ReadAllText(filePath);
-            if (string.IsNullOrEmpty(jsonStream))
+            try
             {
-                return new List<Staff>();
-                
+                using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
+                {
+                    if (fileStream.Length == 0)
+                    {
+
+                        return new List<Staff>();
+
+                    }
+
+                    return (List<Staff>)xmlSerializer.Deserialize(fileStream);
+                }
             }
-            return JsonConvert.DeserializeObject<List<Staff>>(jsonStream, settings);
+            catch (Exception e)
+            {
+
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
         }
 
 
 
         public void CreateStaff(Staff staff)
         {
+
             List<Staff> allStaff = Deserialize();
             allStaff.Add(staff);
             Serialize(allStaff);
@@ -115,10 +160,5 @@ namespace StaffManagement.Data
             return allStaff;
         }
 
-
-
     }
 }
-
-
-
