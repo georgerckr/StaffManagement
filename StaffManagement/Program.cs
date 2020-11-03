@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using StaffManagement.Data.Interface;
 using StaffManagement.Data;
 using System.Configuration;
+using System.Reflection;
+using System.Dynamic;
 
 namespace StaffManagementConsole
 {
@@ -16,10 +18,13 @@ namespace StaffManagementConsole
         public static void Main(string[] args)
         {
             int choice;
-            int type;
+            int staffType;
 
             
-            IStaffRepository staffRepo = new XMLStaffRepository();
+            Type type = Type.GetType(ConfigurationManager.AppSettings.Get("classType"));
+            IStaffRepository staffRepo = (IStaffRepository)Activator.CreateInstance(type);
+            // string dataStore = SettingsLoader.LoadFromConfig();
+
 
             do
             {
@@ -31,9 +36,9 @@ namespace StaffManagementConsole
                 switch (choice)
                 {
                     case 1:
-                        type = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
+                        staffType = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
                         AskDetails.Print("\n*******************\n");
-                        Staff newStaff = StaffOperations.AddStaff((StaffType)type);
+                        Staff newStaff = StaffOperations.AddStaff((StaffType)staffType);
                         staffRepo.CreateStaff(newStaff);
                         break;
 
@@ -47,7 +52,7 @@ namespace StaffManagementConsole
                     case 3:
                         Id = AskDetails.Read("\nEnter Staff ID:");
                         Staff updatedStaff = staffRepo.GetStaffById(Convert.ToInt32(Id));
-                        updatedStaff= StaffOperations.UpdateDetails(updatedStaff);
+                        updatedStaff = StaffOperations.UpdateDetails(updatedStaff);
                         staffRepo.UpdateStaff(updatedStaff);
 
                         break;
@@ -78,14 +83,14 @@ namespace StaffManagementConsole
                             StaffOperations.ViewDetails(staff);
                             AskDetails.Print("\n****************");
                         }
-                        
+
 
 
                         break;
 
                     case 6:
-                        type = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
-                        List<Staff> staffs1 = staffRepo.GetStaffByType((StaffType)type);
+                        staffType = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
+                        List<Staff> staffs1 = staffRepo.GetStaffByType((StaffType)staffType);
                         foreach (var staff in staffs1)
                         {
                             StaffOperations.ViewDetails(staff);
