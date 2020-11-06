@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
@@ -16,6 +17,8 @@ namespace StaffManagement.Model
         public string FullName { get; set; }
         public DateTime DateJoined { get; set; }
         public  StaffType StaffType { get; set; }
+
+       
     }
 
     

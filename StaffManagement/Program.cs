@@ -23,7 +23,7 @@ namespace StaffManagementConsole
             
             Type type = Type.GetType(ConfigurationManager.AppSettings.Get("classType"));
             IStaffRepository staffRepo = (IStaffRepository)Activator.CreateInstance(type);
-            // string dataStore = SettingsLoader.LoadFromConfig();
+            
 
 
             do
@@ -39,7 +39,7 @@ namespace StaffManagementConsole
                         staffType = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
                         AskDetails.Print("\n*******************\n");
                         Staff newStaff = StaffOperations.AddStaff((StaffType)staffType);
-                        staffRepo.CreateStaff(newStaff);
+                        staffRepo.AddStaff(newStaff);
                         break;
 
 
@@ -61,7 +61,7 @@ namespace StaffManagementConsole
                     case 4:
 
                         Id = AskDetails.Read("\nEnter Staff ID");
-                        if (staffRepo.DeleteStaff(Convert.ToInt32(Id)))
+                        if (staffRepo.RemoveStaff(Convert.ToInt32(Id)))
                         {
                             AskDetails.Print("\nStaff deleted!");
                         }

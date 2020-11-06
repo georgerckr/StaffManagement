@@ -17,8 +17,8 @@ namespace StaffManagementConsole
                     TeachingStaff teachingStaff = new TeachingStaff();
                     AddCommonDetails(teachingStaff);
                     teachingStaff.Subject = AskDetails.Read("Enter Subject:");
-                    AskDetails.Print("Staff created with ID:", Convert.ToString(teachingStaff.StaffId));
-                    AskDetails.Print("\n*******************\n");
+                    //AskDetails.Print("Staff created with ID:", Convert.ToString(teachingStaff.StaffId));
+                    //AskDetails.Print("\n*******************\n");
                     return teachingStaff;
 
 
@@ -29,8 +29,8 @@ namespace StaffManagementConsole
                     AddCommonDetails(administrativeStaff);
                     administrativeStaff.Department = AskDetails.Read("Enter Department");
                     administrativeStaff.Role = AskDetails.Read("Enter Role:");
-                    AskDetails.Print("Staff created with ID:", Convert.ToString(administrativeStaff.StaffId));
-                    AskDetails.Print("\n*******************\n");
+                    //AskDetails.Print("Staff created with ID:", Convert.ToString(administrativeStaff.StaffId));
+                    //AskDetails.Print("\n*******************\n");
                     return administrativeStaff;
 
 
@@ -40,8 +40,8 @@ namespace StaffManagementConsole
                     SupportStaff supportStaff = new SupportStaff();
                     AddCommonDetails(supportStaff);
                     supportStaff.Category = AskDetails.Read("Enter Category:");
-                    AskDetails.Print("Staff created with ID:", Convert.ToString(supportStaff.StaffId));
-                    AskDetails.Print("\n*******************\n");
+                    //AskDetails.Print("Staff created with ID:", Convert.ToString(supportStaff.StaffId));
+                    //AskDetails.Print("\n*******************\n");
                     return supportStaff;
 
 
@@ -52,7 +52,7 @@ namespace StaffManagementConsole
 
         public static Staff AddCommonDetails(Staff staff)
         {
-            staff.StaffId = Convert.ToInt32(AskDetails.Read("\nEnter Staff ID:"));
+            //staff.StaffId = Convert.ToInt32(AskDetails.Read("\nEnter Staff ID:"));
             string name = AskDetails.Read("Enter Name:");
             if (String.IsNullOrEmpty(name))
             {

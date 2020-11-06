@@ -45,7 +45,7 @@ namespace StaffManagement.Data
 
 
 
-        public void CreateStaff(Staff staff)
+        public void AddStaff(Staff staff)
         {
             List<Staff> allStaff = Deserialize();
             allStaff.Add(staff);
@@ -81,7 +81,7 @@ namespace StaffManagement.Data
             }
             return null;
         }
-        public bool DeleteStaff(int staffID)
+        public bool RemoveStaff(int staffID)
         {
             List<Staff> allStaff = Deserialize();
             foreach (var staff in allStaff)

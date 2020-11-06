@@ -32,7 +32,7 @@ namespace StaffManagement.Data
 
 
         }
-        public void CreateStaff(Staff staff)
+        public void AddStaff(Staff staff)
         {
             allStaff.Add(staff);
         }
@@ -64,7 +64,7 @@ namespace StaffManagement.Data
             }
             return null;
         }
-        public bool DeleteStaff(int StaffID)
+        public bool RemoveStaff(int StaffID)
         {
             foreach (var staff in allStaff)
             {

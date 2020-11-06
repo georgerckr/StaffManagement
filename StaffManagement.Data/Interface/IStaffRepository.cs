@@ -7,11 +7,11 @@ namespace StaffManagement.Data.Interface
 {
     public interface IStaffRepository
     {
-        void CreateStaff(Staff staff);
+        void AddStaff(Staff staff);
         
         bool UpdateStaff(Staff staff);
         Staff GetStaffById(int staffID);
-        bool DeleteStaff(int staffID);
+        bool RemoveStaff(int staffID);
         List<Staff> GetStaffByType(StaffType staffType);
         List<Staff> GetAllStaff();
         
