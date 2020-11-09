@@ -60,10 +60,10 @@ namespace StaffManagement.Data
 
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
             finally
             {
@@ -94,10 +94,10 @@ namespace StaffManagement.Data
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
             finally
             {
@@ -122,10 +122,10 @@ namespace StaffManagement.Data
                     return allStaff;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
             finally
             {
@@ -150,10 +150,10 @@ namespace StaffManagement.Data
 
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
             finally
             {
@@ -181,10 +181,10 @@ namespace StaffManagement.Data
                     return staffByType;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
             finally
             {
@@ -243,10 +243,10 @@ namespace StaffManagement.Data
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
             finally
             {
@@ -259,7 +259,7 @@ namespace StaffManagement.Data
             List<Staff> staffs = new List<Staff>();
             while (sqlDataReader.Read())
             {
-               
+
                 StaffType stafftype = (StaffType)Enum.Parse(typeof(StaffType), sqlDataReader["StaffType"].ToString());
                 switch (stafftype)
                 {
@@ -299,8 +299,69 @@ namespace StaffManagement.Data
             return staffs;
         }
 
+        public void BulkInsert(List<Staff> allStaff)
+        {
+            try
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("proc_BulkInsertStaff", sqlConnection))
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
 
+                    sqlCommand.Parameters.AddWithValue("@STableType",GetStaffTable(allStaff));
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
 
+                }
+            }
+            catch (Exception e)
+            {
+
+                
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        private DataTable GetStaffTable(List<Staff> allStaff)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("FullName",typeof(String));
+            dataTable.Columns.Add("DateJoined",typeof(DateTime));
+            dataTable.Columns.Add("StaffType",typeof(int));
+            dataTable.Columns.Add("Department",typeof(String));
+            dataTable.Columns.Add("Role",typeof(String));
+            dataTable.Columns.Add("Subject", typeof(String));
+            dataTable.Columns.Add("Category", typeof(String));
+            foreach (var staff in allStaff)
+            {
+                switch (staff.StaffType)
+                {
+                    case StaffType.TeachingStaff:
+                        TeachingStaff teachingStaff = staff as TeachingStaff;
+                        dataTable.Rows.Add(teachingStaff.FullName, teachingStaff.DateJoined, teachingStaff.StaffType, null, null, teachingStaff.Subject, null);
+                        break;
+                    case StaffType.AdministrativeStaff:
+                        AdministrativeStaff administrativeStaff = staff as AdministrativeStaff;
+                        dataTable.Rows.Add(administrativeStaff.FullName, administrativeStaff.DateJoined, administrativeStaff.StaffType, administrativeStaff.Department, administrativeStaff.Role, null, null);
+                        break;
+                    case StaffType.SupportStaff:
+                        SupportStaff supportStaff = staff as SupportStaff;
+                        dataTable.Rows.Add(supportStaff.FullName, supportStaff.DateJoined, supportStaff.StaffType, null, null, null, supportStaff.Category);
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            
+      
+
+            return dataTable;
+        }
 
     }
 }

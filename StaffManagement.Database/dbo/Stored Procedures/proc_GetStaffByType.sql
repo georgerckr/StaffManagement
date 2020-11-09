@@ -11,7 +11,7 @@ BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 
-
+	BEGIN TRY
      SELECT *
 	FROM Staff AS S
 	LEFT OUTER JOIN TeachingStaff AS T
@@ -21,4 +21,9 @@ BEGIN
 	LEFT OUTER JOIN SupportStaff AS SU
 	ON S.SID = SU.SID
 	WHERE S.StaffType = @StaffType;
-END
+END TRY
+	BEGIN CATCH
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+	END

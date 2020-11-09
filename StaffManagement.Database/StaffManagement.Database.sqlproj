@@ -59,6 +59,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\User Defined Types\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\TeachingStaff.sql" />
@@ -71,5 +72,7 @@
     <Build Include="dbo\Stored Procedures\proc_GetStaffByType.sql" />
     <Build Include="dbo\Stored Procedures\proc_GetStaffByID.sql" />
     <Build Include="dbo\Stored Procedures\proc_GetAllStaff.sql" />
+    <Build Include="dbo\Stored Procedures\proc_BulkInsertStaff.sql" />
+    <Build Include="dbo\User Defined Types\StaffTableType.sql" />
   </ItemGroup>
 </Project>

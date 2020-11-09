@@ -28,7 +28,7 @@ namespace StaffManagementConsole
 
             do
             {
-                choice = Convert.ToInt32(AskDetails.Read("\nEnter Operation to be prformed \n1.Add Staff\n2.View Staff Details\n3.Update Staff \n4.Remove Staff \n5.View All Staff\n6.View All Staff by Type"));
+                choice = Convert.ToInt32(AskDetails.Read("\nEnter Operation to be prformed \n1.Add Staff\n2.View Staff Details\n3.Update Staff \n4.Remove Staff \n5.View All Staff\n6.View All Staff by Type\n7.Bulk Insert"));
                 AskDetails.Print("\n*******************\n");
                 string Id;
 
@@ -102,6 +102,20 @@ namespace StaffManagementConsole
                             AskDetails.Print("\nNo Staff details available!");
                         }
 
+                        break;
+                    case 7:
+                        int insertChoice = 1;
+                        List<Staff> allStaff = new List<Staff>();
+                        DBStaffRepository dBStaffRepository = new DBStaffRepository();
+                        while (insertChoice==1)
+                        {
+                            staffType = Convert.ToInt32(AskDetails.Read("Enter Choice \n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n"));
+                            AskDetails.Print("\n*******************\n");
+                            Staff newStaff1 = StaffOperations.AddStaff((StaffType)staffType);
+                            allStaff.Add(newStaff1);
+                            insertChoice = Convert.ToInt32(AskDetails.Read("\nDo you want to enter another staff details?\nEnter Choice\n1.Yes\n2.No"));
+                        }
+                            dBStaffRepository.BulkInsert(allStaff);
                         break;
                 }
 
