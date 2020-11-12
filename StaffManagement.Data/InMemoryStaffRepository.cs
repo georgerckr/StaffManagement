@@ -8,27 +8,10 @@ namespace StaffManagement.Data
 {
     public class InMemoryStaffRepository : IStaffRepository
     {
-         List<Staff> allStaff;
+        List<Staff> allStaff;
         public InMemoryStaffRepository()
         {
             allStaff = new List<Staff>();
-            //SupportStaff supportStaff = new SupportStaff()
-            //{
-            //    Category = "cs",
-            //    FullName = "George",
-            //    StaffId = "20000",
-            //    DateJoined = new DateTime(1998, 5, 5)
-
-
-            //};
-            //AdministrativeStaff administrativeStaff = new AdministrativeStaff();
-            //administrativeStaff.FullName = "Roy";
-            //administrativeStaff.Department = "cs";
-            //administrativeStaff.DateJoined = new DateTime(2004, 5, 5);
-            //administrativeStaff.StaffId = "25000";
-            //administrativeStaff.Role = "VC";
-            //allStaff.Add(administrativeStaff);
-            //allStaff.Add(supportStaff);
 
 
         }
@@ -92,7 +75,7 @@ namespace StaffManagement.Data
         {
             return allStaff;
         }
-       
+
 
     }
 }

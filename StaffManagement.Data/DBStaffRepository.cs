@@ -16,8 +16,6 @@ namespace StaffManagement.Data
         public DBStaffRepository()
         {
             sqlConnection = new SqlConnection(ConfigurationManager.AppSettings["dbConnection"]);
-
-
         }
 
         public void AddStaff(Staff staff)
@@ -71,41 +69,7 @@ namespace StaffManagement.Data
             }
         }
 
-        public bool RemoveStaff(int staffID)
-        {
-            try
-            {
-                using (SqlCommand sqlCommand = new SqlCommand("proc_RemoveStaff", sqlConnection))
-                {
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@SID", staffID);
-                    sqlConnection.Open();
-                    if (sqlCommand.ExecuteNonQuery() == 1)
-                    {
 
-                        return true;
-                    }
-
-                    else
-                    {
-
-                        return false;
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-            finally
-            {
-
-                sqlConnection.Close();
-
-            }
-        }
 
         public List<Staff> GetAllStaff()
         {
@@ -253,6 +217,41 @@ namespace StaffManagement.Data
                 sqlConnection.Close();
             }
         }
+        public bool RemoveStaff(int staffID)
+        {
+            try
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("proc_RemoveStaff", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@SID", staffID);
+                    sqlConnection.Open();
+                    if (sqlCommand.ExecuteNonQuery() == 1)
+                    {
+
+                        return true;
+                    }
+
+                    else
+                    {
+
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+
+                sqlConnection.Close();
+
+            }
+        }
 
         public List<Staff> ReadStaff(SqlDataReader sqlDataReader)
         {
@@ -307,7 +306,7 @@ namespace StaffManagement.Data
                 {
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    sqlCommand.Parameters.AddWithValue("@STableType",GetStaffTable(allStaff));
+                    sqlCommand.Parameters.AddWithValue("@STableType", GetStaffTable(allStaff));
                     sqlConnection.Open();
                     sqlCommand.ExecuteNonQuery();
 
@@ -316,7 +315,7 @@ namespace StaffManagement.Data
             catch (Exception e)
             {
 
-                
+
                 throw e;
             }
             finally
@@ -328,11 +327,11 @@ namespace StaffManagement.Data
         private DataTable GetStaffTable(List<Staff> allStaff)
         {
             DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("FullName",typeof(String));
-            dataTable.Columns.Add("DateJoined",typeof(DateTime));
-            dataTable.Columns.Add("StaffType",typeof(int));
-            dataTable.Columns.Add("Department",typeof(String));
-            dataTable.Columns.Add("Role",typeof(String));
+            dataTable.Columns.Add("FullName", typeof(String));
+            dataTable.Columns.Add("DateJoined", typeof(DateTime));
+            dataTable.Columns.Add("StaffType", typeof(int));
+            dataTable.Columns.Add("Department", typeof(String));
+            dataTable.Columns.Add("Role", typeof(String));
             dataTable.Columns.Add("Subject", typeof(String));
             dataTable.Columns.Add("Category", typeof(String));
             foreach (var staff in allStaff)
@@ -357,8 +356,8 @@ namespace StaffManagement.Data
                 }
             }
 
-            
-      
+
+
 
             return dataTable;
         }

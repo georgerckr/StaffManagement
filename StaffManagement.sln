@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffManagement.Data", "Sta
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StaffManagement.Database", "StaffManagement.Database\StaffManagement.Database.sqlproj", "{F37AB787-F795-4F63-8C51-E0A2558C3BDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffManagement.Web", "StaffManagement.Web\StaffManagement.Web.csproj", "{47C79D41-0526-427A-94FB-A6A937D0F429}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{F37AB787-F795-4F63-8C51-E0A2558C3BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F37AB787-F795-4F63-8C51-E0A2558C3BDB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F37AB787-F795-4F63-8C51-E0A2558C3BDB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{47C79D41-0526-427A-94FB-A6A937D0F429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47C79D41-0526-427A-94FB-A6A937D0F429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47C79D41-0526-427A-94FB-A6A937D0F429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47C79D41-0526-427A-94FB-A6A937D0F429}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

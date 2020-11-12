@@ -15,7 +15,7 @@ BEGIN
      SELECT *
 	FROM Staff AS S
 	LEFT OUTER JOIN TeachingStaff AS T
-	ON S.SID = T.ID
+	ON S.SID = T.SID
 	LEFT OUTER JOIN AdministrativeStaff AS A
 	ON S.SID = A.SID
 	LEFT OUTER JOIN SupportStaff AS SU
