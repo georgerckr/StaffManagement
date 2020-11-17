@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="getData.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>Staff Management System</h1>
+    </div>
+    <div class="body">
+        <div>
+
+            <form>
+                <label>Choose Staff Type:</label>
+                <select name="Staff" id="Staff">
+                    <option value="admin">Administrative Staff</option>
+                    <option value="teaching">Teaching Staff</option>
+                    <option value="support">Support Staff</option>
+                </select>
+                <button type="button" onclick="getStaffByType()">Submit</button>
+                <br><br>
+
+            </form>
+        </div>
+        <div id="table">
+            <table id="staffTable">
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
