@@ -12,12 +12,12 @@
 
             <form>
                 <label>Choose Staff Type:</label>
-                <select name="Staff" id="Staff">
+                <select name="Staff" id="Staff" onchange="getStaffByType()">
                     <option value="admin">Administrative Staff</option>
                     <option value="teaching">Teaching Staff</option>
                     <option value="support">Support Staff</option>
                 </select>
-                <button type="button" onclick="getStaffByType()">Submit</button>
+                <!--<button type="button" onclick="getStaffByType()">Submit</button>-->
                 <br><br>
 
             </form>

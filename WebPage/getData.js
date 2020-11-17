@@ -3,14 +3,8 @@ async function getStaffData(url) {
     let response = await fetch(url, {
         method: 'GET',
         mode: 'cors'
-
     });
     return response.json();
-}
-
-function insertValues(staffData, type) {
-
-    staffData.forE
 }
 
 function insertValues(staffData, type) {
@@ -26,8 +20,6 @@ function insertValues(staffData, type) {
         cell0.innerHTML = staffData[i]['staffId'];
         cell1.innerHTML = staffData[i]['fullName'];
         cell2.innerHTML = staffData[i]['dateJoined'];       
-        console.log(staffData[i]['staffId']);
-
 
         if (type == "admin") {
             cell3.innerHTML = 'Administrative Staff';
