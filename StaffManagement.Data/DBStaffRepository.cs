@@ -305,7 +305,6 @@ namespace StaffManagement.Data
                 using (SqlCommand sqlCommand = new SqlCommand("proc_BulkInsertStaff", sqlConnection))
                 {
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
-
                     sqlCommand.Parameters.AddWithValue("@STableType", GetStaffTable(allStaff));
                     sqlConnection.Open();
                     sqlCommand.ExecuteNonQuery();

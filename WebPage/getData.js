@@ -1,10 +1,12 @@
 let url;
+
 async function getStaffData(url) {
     let response = await fetch(url, {
         method: 'GET',
         mode: 'cors'
     });
     return response.json();
+
 }
 
 function insertValues(staffData, type) {
@@ -19,7 +21,7 @@ function insertValues(staffData, type) {
         let cell5 = newRow.insertCell(5);
         cell0.innerHTML = staffData[i]['staffId'];
         cell1.innerHTML = staffData[i]['fullName'];
-        cell2.innerHTML = staffData[i]['dateJoined'];       
+        cell2.innerHTML = staffData[i]['dateJoined'];
 
         if (type == "admin") {
             cell3.innerHTML = 'Administrative Staff';
@@ -49,7 +51,7 @@ function getStaffByType() {
 		 <th>Department</th>
 		 <th>Role</th>
 		 </tr>`;
-        url = 'https://localhost:44335/api/Staff?type=admin';
+        url = 'https://localhost:44377/api/Staff?type=admin';
     }
     else if (staffType == "teaching") {
         col = `<tr>
@@ -59,7 +61,7 @@ function getStaffByType() {
 		 <th>StaffType</th>
 		 <th>Subject</th>
 		 </tr>`;
-        url = 'https://localhost:44335/api/Staff?type=teaching';
+        url = 'https://localhost:44377/api/Staff?type=teaching';
     }
     else {
         col = `<tr>
@@ -69,13 +71,16 @@ function getStaffByType() {
 		 <th>StaffType</th>
 		 <th>Category</th>
 		 </tr>`;
-        url = 'https://localhost:44335/api/Staff?type=support';
+        url = 'https://localhost:44377/api/Staff?type=support';
     }
     document.getElementById("staffTable").innerHTML = col;
     getStaffData(url)
         .then((data) => {
             console.log(data);
-            insertValues(data, staffType);        
-        }).catch((error) => console.log(error));
+            insertValues(data, staffType);
+        }).catch((error) => {
+            console.log(error)
+        });
+  
 
 }

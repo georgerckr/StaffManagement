@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using StaffManagement.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 
 namespace StaffManagement.Web.Controllers
 {
+    
     [Route("api/Staff")]
     [ApiController]
     public class StaffController : ControllerBase
@@ -80,7 +82,7 @@ namespace StaffManagement.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddStaff([FromBody] JObject staff)
+        public ActionResult<Staff> AddStaff([FromBody] JObject staff)
         {
             int type = (int)staff["staffType"];
             switch (type)
@@ -88,23 +90,26 @@ namespace StaffManagement.Web.Controllers
                 case 1:
                     TeachingStaff teachingStaff = staff.ToObject<TeachingStaff>();
                     dBStaffRepository.AddStaff(teachingStaff);
+                    return Ok(teachingStaff);
                     break;
 
                 case 2:
                     AdministrativeStaff administrativeStaff = staff.ToObject<AdministrativeStaff>();
                     dBStaffRepository.AddStaff(administrativeStaff);
+                    return Ok(administrativeStaff);
                     break;
 
                 case 3:
                     SupportStaff supportStaff = staff.ToObject<SupportStaff>();
                     dBStaffRepository.AddStaff(supportStaff);
+                    return Ok(supportStaff);
                     break;
                 default:
                     break;
             }
-            return Ok();
+            return NotFound();
         }
-
+        
         [HttpPut("{ID}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

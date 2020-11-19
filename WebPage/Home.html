@@ -2,30 +2,42 @@
 <html>
 <head>
     <script src="getData.js"></script>
+    <script src="addStaff.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body onload="getStaffByType()">
     <div class="header">
         <h1>Staff Management System</h1>
     </div>
     <div class="body">
-        <div>
 
-            <form>
-                <label>Choose Staff Type:</label>
-                <select name="Staff" id="Staff" onchange="getStaffByType()">
-                    <option value="admin">Administrative Staff</option>
-                    <option value="teaching">Teaching Staff</option>
-                    <option value="support">Support Staff</option>
-                </select>
-                <!--<button type="button" onclick="getStaffByType()">Submit</button>-->
-                <br><br>
 
-            </form>
-        </div>
+        <form>
+            <label>Choose Staff Type:</label>
+            <select name="Staff" id="Staff" onchange="getStaffByType()">
+                <option value="admin">Administrative Staff</option>
+                <option value="teaching">Teaching Staff</option>
+                <option value="support">Support Staff</option>
+            </select>
+            <br><br>
+        </form>
+
         <div id="table">
             <table id="staffTable">
             </table>
         </div>
+        <br><br>
+        <form name="addStaffForm" class="form-horizontal" id="addStaffForm">
+            <input type="button" class="btn btn-primary" value="Add New Staff" onclick="AddStaff()" />
+            <div id="addForm"></div>
+        </form>
     </div>
 
 </body>
