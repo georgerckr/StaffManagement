@@ -122,19 +122,19 @@ namespace StaffManagement.Web.Controllers
                     TeachingStaff teachingStaff = staff.ToObject<TeachingStaff>();
                     teachingStaff.StaffId = ID;
                     dBStaffRepository.UpdateStaff(teachingStaff);
-                    return Ok();
+                    return Ok(teachingStaff);
 
                 case 2:
                     AdministrativeStaff administrativeStaff = staff.ToObject<AdministrativeStaff>();
                     administrativeStaff.StaffId = ID;
                     dBStaffRepository.UpdateStaff(administrativeStaff);
-                    return Ok();
+                    return Ok(administrativeStaff);
 
                 case 3:
                     SupportStaff supportStaff = staff.ToObject<SupportStaff>();
                     supportStaff.StaffId = ID;
                     dBStaffRepository.UpdateStaff(supportStaff);
-                    return Ok();
+                    return Ok(supportStaff);
 
                 default:
                     break;

@@ -1,23 +1,24 @@
-
-let staffType;
-function AddStaff() {
-    staffType = document.getElementById("Staff").value;
-    var form = "<br>Name: <input type='text' id=fullName><br>Date Joined: <input type='datetime-local'  id=dateJoined><br>";
+function edit(id) {
+    AddStaff();
+    //DeleteStaffById(staffDatas[id]['staffId'] );
+    document.getElementById('submitButton').setAttribute("onClick", 'editStaff(' + staffDatas[id]['staffId'] + ')');
+    document.getElementById("fullName").value = staffDatas[id]['fullName'];
+    document.getElementById("dateJoined").value = staffDatas[id]['dateJoined'];
     if (staffType == "admin") {
-        form += "Department: <input type='text' id=department><br>Role: <input type='text' id=role><br>";
+        document.getElementById("department").value = staffDatas[id]['department'];
+        document.getElementById("role").value = staffDatas[id]['role'];
     }
     if (staffType == "teaching") {
-        form += "Subject: <input type='text' id=subject><br>";
+        document.getElementById("subject").value = staffDatas[id]['subject'];
     }
-    if (staffType=="support") {
-        form += "Category: <input type='text' id=category><br>";
+    if (staffType == "support") {
+        document.getElementById("category").value = staffDatas[id]['category'];
     }
-    form += "<input type='button' id='submitButton' value='Save' onClick='submitData()'><br>";
-    document.getElementById("addForm").innerHTML = form;
+
+
 }
 
-
-async function submitData() {
+function editStaff(staffID) {
     let bodyData;
     if (staffType == "admin") {
         bodyData = JSON.stringify({
@@ -45,8 +46,8 @@ async function submitData() {
         });
     }
     console.log(bodyData);
-    fetch("https://localhost:44377/api/Staff", {
-        method: 'POST',
+    fetch("https://localhost:44377/api/Staff/" + staffID, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -56,6 +57,5 @@ async function submitData() {
         getStaffByType();
     })
         .then(json => console.log(json))
-        .catch(error => console.error('Unable to add item.', error));
+        .catch(error => console.error('Unable to edit item.', error));
 }
-
