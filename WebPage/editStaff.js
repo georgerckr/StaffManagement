@@ -1,7 +1,8 @@
 function edit(id) {
-    AddStaff();
+    AddStaffForm();
     //DeleteStaffById(staffDatas[id]['staffId'] );
     document.getElementById('submitButton').setAttribute("onClick", 'editStaff(' + staffDatas[id]['staffId'] + ')');
+    document.getElementById('deleteButton').setAttribute("onClick", 'deleteStaff(' + staffDatas[id]['staffId'] + ')');
     document.getElementById("fullName").value = staffDatas[id]['fullName'];
     document.getElementById("dateJoined").value = staffDatas[id]['dateJoined'];
     if (staffType == "admin") {
@@ -58,4 +59,33 @@ function editStaff(staffID) {
     })
         .then(json => console.log(json))
         .catch(error => console.error('Unable to edit item.', error));
+}
+function AddStaffForm() {
+    staffType = document.getElementById("Staff").value;
+    var form = "<br>Name: <input type='text' id=fullName><br>Date Joined: <input type='datetime-local'  id=dateJoined><br>";
+    if (staffType == "admin") {
+        form += "Department: <input type='text' id=department><br>Role: <input type='text' id=role><br>";
+    }
+    if (staffType == "teaching") {
+        form += "Subject: <input type='text' id=subject><br>";
+    }
+    if (staffType == "support") {
+        form += "Category: <input type='text' id=category><br>";
+    }
+    form += "<input type='button' id='submitButton' value='Save' onClick='submitData()'><br>";
+    form += "<input type='button' id='deleteButton' value='Delete' ><br>";
+    document.getElementById("addForm").innerHTML = form;
+}
+
+function deleteStaff(id) {
+    fetch("https://localhost:44377/api/Staff/" + id, {
+        method: 'DELETE',
+
+    }).then(response => {
+        if (response.ok) {
+            getStaffByType();
+            document.getElementById("addForm").innerHTML = "";
+        }
+    })
+        .catch(error => console.error('Unable to add item.', error));
 }
