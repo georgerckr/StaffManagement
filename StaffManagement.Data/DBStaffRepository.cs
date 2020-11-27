@@ -99,7 +99,7 @@ namespace StaffManagement.Data
 
         public Staff GetStaffById(int staffID)
         {
-
+            
             try
             {
                 using (SqlCommand sqlCommand = new SqlCommand("proc_GetStaffByID", sqlConnection))

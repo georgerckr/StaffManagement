@@ -2,18 +2,21 @@
 let staffType;
 function AddStaff() {
     staffType = document.getElementById("Staff").value;
-    var form = "<br>Name: <input type='text' id=fullName><br>Date Joined: <input type='datetime-local'  id=dateJoined><br>";
+    var form = " <span class=\"close\" onClick=\" closeModal()\" >&times;</span> <br>Name <br><input type='text' id=fullName><br>Date Joined<br> <input type='datetime-local'  id=dateJoined><br>";
+    //var form = " <br>Name <br><input type='text' id=fullName><br>Date Joined<br> <input type='datetime-local'  id=dateJoined><br>";
     if (staffType == "admin") {
-        form += "Department: <input type='text' id=department><br>Role: <input type='text' id=role><br>";
+        form += "Department<br> <input type='text' id=department><br>Role<br> <input type='text' id=role><br>";
     }
     if (staffType == "teaching") {
-        form += "Subject: <input type='text' id=subject><br>";
+        form += "Subject<br> <input type='text' id=subject><br>";
     }
-    if (staffType=="support") {
-        form += "Category: <input type='text' id=category><br>";
+    if (staffType == "support") {
+        form += "Category <br> <input type='text' id=category><br>";
     }
     form += "<input type='button' id='submitButton' value='Save' onClick='submitData()'><br>";
+    
     document.getElementById("addForm").innerHTML = form;
+   document.getElementById("addFormModal").style.display = "block";
 }
 
 
@@ -52,10 +55,18 @@ async function submitData() {
         },
         body: bodyData
     }).then(response => {
-        response.json()
+        response.json();
         getStaffByType();
     })
         .then(json => console.log(json))
         .catch(error => console.error('Unable to add item.', error));
 }
+window.onclick = function (event) {
+    if (event.target == document.getElementById("addFormModal")) {
+        document.getElementById("addFormModal").style.display = "none";
+    }
+}
 
+function closeModal() {
+    document.getElementById("addFormModal").style.display = "none";
+}

@@ -23,22 +23,20 @@
                 <option value="support">Support Staff</option>
             </select>
             <br><br>
-
+            <input type="button" value="Add New Staff" onclick="AddStaff()" />
+            <input type="button" value="Delete" onclick="deleteRow()" />
         </form>
-        <input type="button" value="Add New Staff" onclick="AddStaff()" />
-        <input type="button" value="Delete" onclick="deleteRow()" />
-
 
         <div id="table">
             <table id="staffTable">
             </table>
         </div>
         <br><br>
-
         <div id="addFormModal" class="modal">
             <div class="modal-content" id="addForm">
                 <form name="addStaffForm" id="addStaffForm">
                 </form>
+
             </div>
         </div>
     </div>

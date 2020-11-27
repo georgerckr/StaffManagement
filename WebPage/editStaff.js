@@ -1,8 +1,10 @@
 function edit(id) {
-    AddStaffForm();
-    //DeleteStaffById(staffDatas[id]['staffId'] );
-    document.getElementById('submitButton').setAttribute("onClick", 'editStaff(' + staffDatas[id]['staffId'] + ')');
-    document.getElementById('deleteButton').setAttribute("onClick", 'deleteStaff(' + staffDatas[id]['staffId'] + ')');
+    if (event.target == document.getElementById("checkbox" + id)) {
+        return; 
+        // return if clicked on checkbox,else show edit form
+    }
+    AddStaff();
+    document.getElementById('submitButton').setAttribute("onClick", 'editStaff(' + staffDatas[id]['staffId'] + ')'); 
     document.getElementById("fullName").value = staffDatas[id]['fullName'];
     document.getElementById("dateJoined").value = staffDatas[id]['dateJoined'];
     if (staffType == "admin") {
@@ -60,32 +62,34 @@ function editStaff(staffID) {
         .then(json => console.log(json))
         .catch(error => console.error('Unable to edit item.', error));
 }
-function AddStaffForm() {
-    staffType = document.getElementById("Staff").value;
-    var form = "<br>Name: <input type='text' id=fullName><br>Date Joined: <input type='datetime-local'  id=dateJoined><br>";
-    if (staffType == "admin") {
-        form += "Department: <input type='text' id=department><br>Role: <input type='text' id=role><br>";
+
+function deleteRow() {
+
+    var table = document.getElementById("staffTable");
+    var idList = [];
+    for (var index = 0; index < staffDatas.length; index++) {
+
+        var input = table.rows[index + 1].cells[0].children[0];
+        if (input && input.checked) {
+
+            idList.push(staffDatas[index]["staffId"]);
+        }
     }
-    if (staffType == "teaching") {
-        form += "Subject: <input type='text' id=subject><br>";
+
+    for (var i = 0; i < idList.length; i++) {
+        deleteStaff(idList[i]);
     }
-    if (staffType == "support") {
-        form += "Category: <input type='text' id=category><br>";
-    }
-    form += "<input type='button' id='submitButton' value='Save' onClick='submitData()'><br>";
-    form += "<input type='button' id='deleteButton' value='Delete' ><br>";
-    document.getElementById("addForm").innerHTML = form;
+    getStaffByType();
 }
 
 function deleteStaff(id) {
     fetch("https://localhost:44377/api/Staff/" + id, {
         method: 'DELETE',
-
     }).then(response => {
         if (response.ok) {
             getStaffByType();
             document.getElementById("addForm").innerHTML = "";
         }
     })
-        .catch(error => console.error('Unable to add item.', error));
+        .catch(error => console.error('Unable to delete item.', error));
 }

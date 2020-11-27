@@ -33,7 +33,7 @@ namespace StaffManagement.Web.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Staff>> GetStaffByType(string type)
         {
-            switch (type.ToLower())
+            switch (type?.ToLower())
             {
                 case "teaching":
                     List<TeachingStaff> teachingStaffs = dBStaffRepository
