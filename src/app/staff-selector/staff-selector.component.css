@@ -1,0 +1,38 @@
+  select {
+      width: 20%;
+      padding: 8px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  
+  .choose-staff {
+      margin-top: 10px;
+  }
+  
+  .staff-table {
+      border-collapse: collapse;
+      width: 60%;
+  }
+  
+  .staff-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+  }
+  
+  .staff-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+  }
+  
+  .staff-table tr:hover {
+      background-color: #ddd;
+  }
+  
+  .staff-table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #78c57c;
+  }

@@ -1,0 +1,34 @@
+<div>
+    <form class="choose-staff">
+        <label>Choose Staff Type:</label>
+        <select name="Staff" id="Staff" (change)="getStaffByType($event)">
+            <option value="admin">Administrative Staff</option>
+            <option value="teaching">Teaching Staff</option>
+            <option value="support">Support Staff</option>
+        </select>
+        <br>
+        <input *ngIf="this.headers.length" type="button" value="Add New staff" (click)="addForm.addData()" />
+        <input *ngIf="this.headers.length" type="button" value="Delete" (click)="deleteRow()" />
+        <br>
+    </form>
+
+    <table class="staff-table" id="staffTable" #sTable>
+        <tr>
+            <th *ngIf="this.headers.length"><input type="checkbox" [(ngModel)]="isChecked"></th>
+            <th *ngFor="let header of headers">{{header}}</th>
+        </tr>
+        <tr *ngFor="let staff of staffs">
+            <td><input type="checkbox" [checked]="isChecked" />&nbsp;</td>
+            <td (click)="addForm.editData(staff.staffId)">{{staff.staffId}}</td>
+            <td (click)="addForm.editData(staff.staffId)">{{staff.fullName}}</td>
+            <td (click)="addForm.editData(staff.staffId)">{{staff.dateJoined}}</td>
+            <td (click)="addForm.editData(staff.staffId)" *ngIf="staff.staffType==2">{{staff.department}}</td>
+            <td (click)="addForm.editData(staff.staffId)" *ngIf="staff.staffType==2">{{staff.role}}</td>
+            <td (click)="addForm.editData(staff.staffId)" *ngIf="staff.staffType==3">{{staff.category}}</td>
+            <td (click)="addForm.editData(staff.staffId)" *ngIf="staff.staffType==1">{{staff.subject}}</td>
+        </tr>
+    </table>
+
+
+    <app-add-form [type]="this.staffType" (reload)="getStaffByType()" #addForm> </app-add-form>
+</div>

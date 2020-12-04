@@ -1,0 +1,31 @@
+<div id="addFormModal" class="modal" #staffModal>
+    <div class="modal-content" id="addForm">
+
+        <form *ngIf="visible" class="staffForm" name="sForm" #sForm="ngForm">
+
+            <span class="close" (click)=" closeModal()">&times;</span>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" [(ngModel)]="fullName"><br>
+            <label for="dateJoined">Date Of Joining:</label><br>
+            <input type="datetime-local" id="dateJoined" name="dateJoined" [(ngModel)]="dateJoined"><br>
+
+            <div [ngSwitch]="type">
+                <div *ngSwitchCase="'admin'">
+                    <label for="department">Department:</label><br>
+                    <input type="text" id="department" name="department" [(ngModel)]="department"><br>
+                    <label for="role">Role:</label><br>
+                    <input type="text" id="role" name="role" [(ngModel)]="role"><br>
+                </div>
+                <div *ngSwitchCase="'support'">
+                    <label for="category">Category:</label><br>
+                    <input type="text" id="category" name="category" [(ngModel)]="category"><br>
+                </div>
+                <div *ngSwitchCase="'teaching'">
+                    <label for="subject">Subject:</label><br>
+                    <input type="text" id="subject" name="subject" [(ngModel)]="subject"><br>
+                </div>
+            </div>
+            <input type="button" value="Submit" id="submitButton" (click)="readStaff();closeModal()" />
+        </form>
+    </div>
+</div>
